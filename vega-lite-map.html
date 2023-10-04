@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+  <div id="vis"></div>
+
+  <script>
+    const spec = "bar.vl.json";
+  	vegaEmbed("#vis", {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "description": "Um mapa GeoJSON simples com marcações personalizadas.",
+            "data": {
+                "url": "geojs-35-mun.json",
+                "format": {
+                    "type": "json",
+                    "property": "features"
+                }
+            },
+            "mark": "geoshape",
+            "projection": {
+                "type": "identity",
+                "reflectY": true
+            }
+        })
+    	// result.view provides access to the Vega View API
+      .then(result => console.log(result))
+      .catch(console.warn);
+  </script>
+</body>

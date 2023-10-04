@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plot map</title>
+</head>
+<body>
+    <div id="myplot"></div>
+    <script type="module">
+
+        import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+
+        // const plot = Plot.rectY({length: 10000}, Plot.binX({y: "count"}, {x: Math.random})).plot();
+        // const div = document.querySelector("#myplot");
+        // div.append(plot);
+        // https://observablehq.com/@didoesdigital/about-map-data-geojson-and-topojson-with-d3
+        const plot = Plot.plot({
+            projection: "albers-usa",
+            color: {scheme: "Spectral"},
+            marks: [
+                Plot.geo(stateMesh, {strokeOpacity: 0.25}),
+                Plot.dot(walmarts, Plot.hexbin(
+                {fill: "median", r: "count"},
+                {x: "longitude", y: "latitude", binWidth: 14, fill: "date", stroke: "currentColor", strokeWidth: 0.5}
+                ))
+            ],
+            height: 500, // Update canvas height
+            width: 800, // Update canvas width
+            margin: 50 // Update margins
+        });
+
+    </script>
+</body>
+</html>
